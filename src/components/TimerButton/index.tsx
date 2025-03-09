@@ -1,12 +1,18 @@
-import { Pressable, Text } from "react-native"
+import { Pressable, PressableProps, Text } from "react-native"
 import styles from "./styles"
 
-const TimerButton = () => {
+interface TimerButtonProps extends PressableProps {
+  buttonText: string;
+  onPress: () => void;
+}
+
+const TimerButton = ({ buttonText, onPress }: TimerButtonProps) => {
   return (
     <Pressable
       style={styles.container}
+      onPress={onPress}
     >
-      <Text>Start</Text>
+      <Text>{buttonText}</Text>
     </Pressable>
   );
 }
