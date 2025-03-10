@@ -2,10 +2,18 @@ import { useEffect, useState } from "react"
 import { Text, View } from "react-native";
 import styles from "./styles";
 import TimerButton from "../TimerButton";
+import CustomModal from "../CustomModal";
 
 const Timer = () => {
   const [time, setTime] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
+    setModalMessage('');
+  }
 
   const timerStart = () => {
     if (!isRunning) {
@@ -19,9 +27,16 @@ const Timer = () => {
     }
   };
 
+  const timerStop = () => {
+    timerPause();
+    setModalMessage('Finalizar atendimento?');
+    setIsModalVisible(true);
+  }
+
   const timerReset = () => {
     setTime(0);
     setIsRunning(false);
+    handleCloseModal();
   };
 
   useEffect(() => {
@@ -56,11 +71,17 @@ const Timer = () => {
         { isRunning ? 
           <TimerButton 
             buttonText='Stop'
-            onPress={timerReset}
+            onPress={timerStop}
           />
           :
           null
         }
+        <CustomModal
+          visible={isModalVisible}
+          message={modalMessage}
+          onPress={timerReset}
+          close={handleCloseModal}
+        />
       </View>
     </View>
   );
