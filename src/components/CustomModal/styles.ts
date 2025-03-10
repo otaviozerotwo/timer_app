@@ -31,14 +31,21 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
+    width: '100%',
     justifyContent: 'space-between',
   },
   button: {
+    width: 96,
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 16,
     elevation: 2,
-    backgroundColor: '#2196F3'
+  },
+  buttonConfirm: {
+    backgroundColor: 'green',
+  },
+  buttonCancel: {
+    backgroundColor: 'red',
   },
   buttonText: {
     color: '#FFF',
